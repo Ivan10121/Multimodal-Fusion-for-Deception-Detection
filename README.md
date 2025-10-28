@@ -76,28 +76,19 @@ pip install -r requirements.txt
 - **Backbone:** Transformer encoder (1 layer, 4 heads, FF=256, dropout 0.5)  
 - **Tokens:** learnable `[CLS]` + 128-D positional embeddings  
 - **Head:** `128 → 64 → 2` (ReLU, dropout 0.5)  
-Train:
-```bash
-python src/train_visual.py --config configs/visual.yaml
-```
+
 
 ### Audio
 - **Input:** sequence of 20-D MFCC frames (0.2 s)  
 - **Backbone:** Transformer encoder (1 layer, 4 heads, FF=25, dropout 0.5)  
 - **Tokens:** learnable `[CLS]` + 20-D positional embeddings  
 - **Head:** `20 → 64 → 2` (ReLU, dropout 0.5)  
-Train:
-```bash
-python src/train_audio.py --config configs/audio.yaml
-```
+
 
 ### Text
 - **Input:** sentence-level BERT embeddings (128-D)  
 - **Clip representation:** mean pool across sentences → single 128-D vector  
-Extract:
-```bash
-python src/extract_text_repr.py
-```
+
 
 ---
 
@@ -109,11 +100,6 @@ The three 128-D vectors (`t`, `v`, `a`) are combined via **softmax-gated fusion*
 - Gating MLP: `concat(t, v, a) ∈ R^{384} → 128 → 3 → softmax` → weights `(w_t, w_v, w_a)`
 - **Fused vector:** `w_t·t + w_v·v + w_a·a`
 - **Final classifier:** `128 → 64 → 1` (BCEWithLogitsLoss)
-
-Train fusion:
-```bash
-python src/train_fusion.py --config configs/fusion.yaml
-```
 
 ---
 
@@ -137,56 +123,12 @@ python src/eval_modality.py --modality fusion --checkpoint runs/fusion/best.pt
 
 ---
 
-## Configuration
-Example (`configs/fusion.yaml`):
-```yaml
-seed: 42
-batch_size: 64
-epochs: 100
-optimizer:
-  name: adamw
-  lr: 1.5e-4
-  weight_decay: 0.01
-scheduler:
-  name: cosine
-  warmup_epochs: 5
-fusion:
-  proj_dim: 128
-  dropout: 0.5
-  gate_hidden: 128
-  final_hidden: 64
-paths:
-  data_root: data/
-  runs_root: runs/
-```
-
----
-
 ## Roadmap
 - Add attention visualizations and per-modality saliency
 - Explore BERT fine-tuning and larger text encoders
 - Temporal alignment and cross-modal attention
 - Robustness checks (noise, missing modality)
 
----
-
-## Ethical Considerations
-Deception detection is **high-stakes**. Use models responsibly:
-- Always include **human oversight** and due-process safeguards  
-- Respect privacy, consent, and data governance rules  
-- Avoid deployment for consequential decisions without rigorous validation
-
----
-
-## Citation
-```bibtex
-@misc{Galvan2025MultimodalFusion,
-  author       = {Iván Galván Gómez},
-  title        = {Multimodal Fusion for Deception Detection},
-  year         = {2025},
-  howpublished = {https://github.com/Ivan10121/Multimodal-Fusion}
-}
-```
 
 ---
 
@@ -195,8 +137,4 @@ Deception detection is **high-stakes**. Use models responsibly:
 Universidad Panamericana – Aguascalientes, Mexico  
 ✉️ 0246325@up.edu.mx
 
----
-
-## License
-Released under the **MIT License**. See `LICENSE` for details.
 
