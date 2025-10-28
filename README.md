@@ -40,12 +40,9 @@ Multimodal fusion markedly outperforms single-modality models.
 ## Requirements
 - Python **3.10+**
 - PyTorch **2.x** (CUDA optional)
-- NumPy, SciPy, scikit-learn, tqdm, PyYAML
+- NumPy, scikit-learn
 
-Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+
 
 ---
 
