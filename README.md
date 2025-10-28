@@ -2,9 +2,7 @@
 
 > A modular multimodal pipeline for deception (lie) detection using **ATSFace** features. Visual, audio, and textual streams are modeled independently and then combined via a **softmax-gated fusion** mechanism for the final classification.
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.x-red)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 
 ---
 
