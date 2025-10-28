@@ -101,35 +101,6 @@ The three 128-D vectors (`t`, `v`, `a`) are combined via **softmax-gated fusion*
 
 ---
 
-## Evaluation
-Compute metrics (accuracy, precision, recall, F1) and confusion matrices:
-```bash
-# Visual
-python src/eval_modality.py --modality visual --checkpoint runs/visual/best.pt
-# Audio
-python src/eval_modality.py --modality audio  --checkpoint runs/audio/best.pt
-# Fusion
-python src/eval_modality.py --modality fusion --checkpoint runs/fusion/best.pt
-```
-
----
-
-## Reproducibility
-- Fixed **15%** independent test split  
-- **5-fold** stratified CV for model selection  
-- **Early stopping** and consistent fold indices across all modalities and fusion
-
----
-
-## Roadmap
-- Add attention visualizations and per-modality saliency
-- Explore BERT fine-tuning and larger text encoders
-- Temporal alignment and cross-modal attention
-- Robustness checks (noise, missing modality)
-
-
----
-
 ## Author
 **Iván Galván Gómez**  
 Universidad Panamericana – Aguascalientes, Mexico  
