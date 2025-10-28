@@ -8,30 +8,6 @@
 
 ---
 
-## Table of Contents
-- [Overview](#overview)
-- [Results](#results)
-- [Repository Structure](#repository-structure)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Dataset](#dataset)
-- [Training Setup](#training-setup)
-- [Per-Modality Models](#per-modality-models)
-  - [Visual](#visual)
-  - [Audio](#audio)
-  - [Text](#text)
-- [Multimodal Fusion](#multimodal-fusion)
-- [Evaluation](#evaluation)
-- [Reproducibility](#reproducibility)
-- [Configuration](#configuration)
-- [Roadmap](#roadmap)
-- [Ethical Considerations](#ethical-considerations)
-- [Citation](#citation)
-- [Author](#author)
-- [License](#license)
-
----
-
 ## Overview
 This project explores **multimodal integration** for lie detection with precomputed features from **ATSFace**:
 
@@ -63,40 +39,6 @@ Multimodal fusion markedly outperforms single-modality models.
 
 ---
 
-## Repository Structure
-```
-.
-├─ data/
-│  ├─ visual/          # FaceNet .npy sequences: [T_v, 128]
-│  ├─ audio/           # MFCC .npy sequences:   [T_a, 20]
-│  ├─ text/            # Averaged BERT vectors: [128]
-│  └─ splits/          # Fold indices / hold-out JSON files
-├─ src/
-│  ├─ models/
-│  │  ├─ transformer_visual.py
-│  │  ├─ transformer_audio.py
-│  │  └─ fusion_gated.py
-│  ├─ dataio/
-│  │  ├─ datasets.py
-│  │  └─ collate.py
-│  ├─ train_visual.py
-│  ├─ train_audio.py
-│  ├─ extract_text_repr.py
-│  ├─ train_fusion.py
-│  ├─ eval_modality.py
-│  └─ utils.py
-├─ configs/
-│  ├─ visual.yaml
-│  ├─ audio.yaml
-│  └─ fusion.yaml
-├─ notebooks/
-│  └─ exploration.ipynb
-├─ requirements.txt
-└─ README.md
-```
-
----
-
 ## Requirements
 - Python **3.10+**
 - PyTorch **2.x** (CUDA optional)
@@ -109,37 +51,12 @@ pip install -r requirements.txt
 
 ---
 
-## Installation
-```bash
-git clone https://github.com/Ivan10121/Multimodal-Fusion.git
-cd Multimodal-Fusion
-python -m venv .venv
-# macOS/Linux
-source .venv/bin/activate
-# Windows
-# .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
----
-
 ## Dataset
 **ATSFace** provides **precomputed features**, not raw videos.
 
 - **Clips:** 309 (147 deceptive / 162 truthful)  
 - **Avg duration:** ~23 s (≈10–50 s range)  
 - **Recording:** iPhone 14 Pro, 1080p@30fps, Chinese prompts
-
-Expected layout:
-```
-data/
-  visual/clip123.npy    # [T_v, 128]
-  audio/clip123.npy     # [T_a, 20]
-  text/clip123.npy      # [128] (mean of sentence embeddings)
-  splits/test_ids.json
-  splits/folds.json
-```
-> Place `.npy` files under `data/` or update paths in `configs/*.yaml`.
 
 ---
 
